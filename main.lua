@@ -1,12 +1,11 @@
-local Launcher = {
-    priority = {} --// Prioritized resources
-    -- example: priority = {"mysql", "anticheat"} 
-}
+local Launcher = {}
 
 function Launcher:init()
     self.resources = getResources()
     self.isInitializing = true
     self.startedResource = 0
+    self.priority = {}
+    -- example: self.priority = {"mysql", "anticheat"} 
 
     for _, resourceName in ipairs(self.priority) do
         local resource = getResourceFromName(resourceName)
