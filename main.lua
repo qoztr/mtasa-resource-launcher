@@ -1,14 +1,6 @@
 local Launcher = {
-    resources = nil,
-    isInitializing = false,
-    startedResource = 0,
     priority = {} --// Prioritized resources
     -- example: priority = {"mysql", "anticheat"} 
-}
-
-Launcher._function = {
-    init = function() Launcher:init() end,
-    serverConnect = function() Launcher:serverConnect() end,
 }
 
 function Launcher:init()
@@ -39,13 +31,11 @@ function Launcher:init()
     self.resources = nil
     self.isInitializing = false
 end
-
-addEventHandler("onResourceStart", resourceRoot, Launcher._function.init)
+addEventHandler("onResourceStart", resourceRoot, function() Launcher:init() end)
 
 function Launcher:serverConnect()
     if self.isInitializing then
         cancelEvent(true, "Please wait while the server is being prepared.")
     end
 end
-
-addEventHandler("onPlayerConnect", root, Launcher._function.serverConnect)
+addEventHandler("onPlayerConnect", root, function() Launcher:serverConnect() end)
